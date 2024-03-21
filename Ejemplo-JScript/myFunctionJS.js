@@ -1,3 +1,4 @@
+// This is an example of JScript function
 function myFunction(executionContext) {
 
 var formContext = executionContext.getFormContext();
