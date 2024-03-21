@@ -24,6 +24,7 @@ namespace Aplicación_de_consola_D365
 
             string url = "https://organization.crm.dynamics.com";
             string clientId = "dfd45868-59d1-4259-b231-a551108d2ad2";
+            string clientSecret = "o4r8Q~K9llAAgyx-B4TN3q4bJF3ar1kMm.LWWbae";
             string appId = "51f81489-12ee-4a9e-aaae-a2591f45987d";
             string connectionString = $@"";
 
