@@ -2,6 +2,19 @@
 
 namespace Aplicación_de_consola_D365
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Microsoft.Xrm.Sdk;
+    using Microsoft.Xrm.Sdk.Client;
+    using Microsoft.Crm.Sdk.Messages;
+    using System.Net;
+    using System.ServiceModel.Description;
+    using Microsoft.Xrm.Tooling.Connector;
+    using static System.Net.WebRequestMethods;
+    using System.Security.Policy;
     class Program
     {
         static void Main(string[] args)
