@@ -45,14 +45,15 @@ To export and import data, you need to create a schema file that defines the str
    ```bash
    pac tool cmt
    ```
+   This command will open Configuration Migration Tool from UI.
 
 2. **Select create schema**
    
    ![Select Create Schema](https://github.com/baraveze/D365/blob/main/Doc/DataMigrationTool/1-CreateSchema.png)
 
 3. **Connect to your source environment**
-
-You will be asked to connect to your source environment to create schema file.
+    
+   You will be asked to connect to your source environment to create schema file.
 
 3. **Add the entity you want to migrate**
    
