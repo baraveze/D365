@@ -48,7 +48,7 @@ To export and import data, you need to create a schema file that defines the str
 
 2. **Select create schema**
    
-   [Select Create Schema](https://github.com/baraveze/D365/blob/main/Doc/DataMigrationTool/1-CreateSchema.png)
+   ![Select Create Schema](https://github.com/baraveze/D365/blob/main/Doc/DataMigrationTool/1-CreateSchema.png)
 
 3. **Connect to your source environment**
 
