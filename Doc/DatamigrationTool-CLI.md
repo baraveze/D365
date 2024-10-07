@@ -24,48 +24,47 @@ Replace `<your-env-name>` with your environment's URL.
 
 3. A browser window will open for you to authenticate using your credentials.
 
+If you have already created the connection previously, run following command:
+```bash
+pac env list
+```
+this command will list you all the environments you have tied to your connection.
+
+Then run this command to pick one of the environments of that list:
+```bash
+pac env select -env <environment name>
+```
+<environment name> could be this informantion from the environment list (ID, url, unique name, or partial name)
+
 ## Step 3: Create Schema File for Data Migration
 
-To export and import data, you need to create a schema file that defines the structure of your entities and fields.
+To export and import data, you need to create a schema file that defines the structure of your entities and fields. This is the only step you need to do using Data Migration Configuration Tool.
 
-1. **Create a New Schema File**
+1. **Open Configuration Data Migration Tool**
    Run the following command to create a schema file for your environment:
    ```bash
-   pac data schema init --output <schema file path>
-   ```
-   Example:
-   ```bash
-   pac data schema init --output schema.xml
+   pac tool cmt
    ```
 
-2. **Add Entities to the Schema**
-   Use the `pac data schema add-entity` command to include the entities you want to export. For example:
-   ```bash
-   pac data schema add-entity --name <entity name> --schemaFile <schema file path>
-   ```
-   Example:
-   ```bash
-   pac data schema add-entity --name account --schemaFile schema.xml
-   ```
+2. **Select create schema**
+   
+   ![Select Create Schema](Doc\DataMigrationTool\1-CreateSchema.png)
 
-3. **Add Fields to the Entities**
-   You can specify which fields within an entity you want to export:
-   ```bash
-   pac data schema add-field --name <field name> --entity <entity name> --schemaFile <schema file path>
-   ```
-   Example:
-   ```bash
-   pac data schema add-field --name name --entity account --schemaFile schema.xml
-   ```
+3. **Connect to your source environment**
 
-4. **Review and Modify the Schema**
-   Open the `schema.xml` file in a text editor to review and make any additional modifications manually. Ensure all the necessary entities and fields are correctly included.
+You will be asked to connect to your source environment to create schema file.
 
-5. **Save the Schema File**
-   Once you've created the schema file and added the required entities and fields, save it in your working directory.
+3. **Add the entity you want to migrate**
+   
+   The tool let you add more than one entity per file but I recommend to create one schema file per entity. Add the full entity if you want to migrate all fields for that entity or you can select which fields you want to migrate. 
+   If you want to keep same guid along the environments you have to add the uniqueidentifier of the table in the schema. Also, by defualt the schema will consider to export all records. But you can add a filter, using Fetch XML, to only export a sub set of data (Active records, for instance).
+
+4. **Save and export schema file**
+   Once you finish setting schema entity, you have to click on "Save and Export" button. Choose an appropriate name for it, a good name could be [table name] + Schema.xml. For example: accountSchema.xml. Save the file in a place you can search it easily. My suggestion would be place it in the same directory where you will run the CLI.
+
+   After that step, the tool will ask you if you want to export data since you've created a schema file. Click on "No" because you are gonna use CLI method to import data.
 
 ## Step 4: Export Data from Source Environment
-If you're migrating from an existing Power Platform environment:
 
 1. Run the following command to export the data:
    ```bash
@@ -75,42 +74,41 @@ If you're migrating from an existing Power Platform environment:
 - The schema file defines what data is exported (e.g., entities and fields).
 - The export file is where your data will be stored.
 
-## Step 5: Prepare the Destination Environment
-Make sure that the destination environment is ready for the data import.
+**Extensions:**
+- Schema file should have .xml extension
+- Data file should have .zip extension
 
-1. Set up the required solutions and entities in the target environment.
-2. Ensure the environment’s data structure matches your source data.
+For example:
+```bash
+   pac data export --schemaFile accountSchema.xml --dataFile accountData.zip
+   ```
+
+## Step 5: Prepare the Destination Environment
+Make sure that the destination environment is ready for the data import. Also, check if you see the target environment in the environmen list. To check that, run this command:
+```bash
+   pac env list
+   ```
+Select your target environment running this command:
+```bash
+pac env select -env <environment name>
+```
 
 ## Step 6: Import Data to the Destination Environment
-Now, you can import the exported data into the target environment.
+Now, you can import the exported data into the target environment. This command imports the data from the source file into the destination environment.
 
 1. Run the following command:
    ```bash
-   pac data import --dataFile <export file path>
+   pac data import --data <data.zip file path> [--verbose true / false]
    ```
+   For example:
+   ```bash
+   pac data import --data accountData.zip
+   ```
+   verbose is an optional parameter that can add more output information during data import.
 
-2. This command imports the data from the source file into the destination environment.
 
 ## Step 7: Verify Data Migration
 Once the import process is complete, verify that the data was successfully migrated:
-
-1. Log in to the target Power Platform environment.
-2. Check the relevant entities or tables to ensure data accuracy.
-
-   You can also use Power BI or the Dynamics 365 interface to visualize and validate the migrated data.
-
-## Step 8: Resolve Any Errors
-If any issues arise during the migration process, Power Platform CLI will provide error logs. Address these as needed:
-
-1. Review the log for error details.
-2. Correct the issues in your source data or target environment.
-3. Re-run the import process if necessary.
-
-## Step 9: Cleanup
-After a successful migration, you can remove temporary files or unnecessary backups.
-```bash
-rm <export file path>
-```
 
 ## Optional: Automating with Scripts
 If you plan to migrate data regularly, consider creating a script to automate the export/import steps.
@@ -127,4 +125,4 @@ pac data export --schemaFile "schema.xml" --dataFile "data.zip"
 pac data import --dataFile "data.zip"
 ```
 
-This script can be run periodically to manage data migration more efficiently.
+This script can be run periodically to manage data migration more efficiently.pac
