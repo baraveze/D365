@@ -55,12 +55,13 @@ To export and import data, you need to create a schema file that defines the str
     
    You will be asked to connect to your source environment to create schema file.
 
-3. **Add the entity you want to migrate**
+4. **Add the entity you want to migrate**
    
    The tool let you add more than one entity per file but I recommend to create one schema file per entity. Add the full entity if you want to migrate all fields for that entity or you can select which fields you want to migrate. 
    If you want to keep same guid along the environments you have to add the uniqueidentifier of the table in the schema. Also, by defualt the schema will consider to export all records. But you can add a filter, using Fetch XML, to only export a sub set of data (Active records, for instance).
 
-4. **Save and export schema file**
+5. **Save and export schema file**
+   
    Once you finish setting schema entity, you have to click on "Save and Export" button. Choose an appropriate name for it, a good name could be [table name] + Schema.xml. For example: accountSchema.xml. Save the file in a place you can search it easily. My suggestion would be place it in the same directory where you will run the CLI.
 
    After that step, the tool will ask you if you want to export data since you've created a schema file. Click on "No" because you are gonna use CLI method to import data.
@@ -109,7 +110,7 @@ Now, you can import the exported data into the target environment. This command 
 
 
 ## Step 7: Verify Data Migration
-Once the import process is complete, verify that the data was successfully migrated:
+Once the import process is complete, verify that the data was successfully migrated.
 
 ## Optional: Automating with Scripts
 If you plan to migrate data regularly, consider creating a script to automate the export/import steps.
