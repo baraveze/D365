@@ -1,0 +1,2 @@
+"OrderID","TableName","AddToImport","FolderPath","FilePath","LastSuccessfulRun"
+"1","Account","Yes","Exports\","accountSchema.xml",""
